@@ -16,7 +16,7 @@
                 <!-- Back Link Start -->
 
                 <div class="row">
-                    <div class="col-12 pb-3 px-0">
+                    <div class="col-12 pb-3 px-1">
                         <a class="text-secondary text-decoration-none" runat="server" href="~/files/default.aspx">Home / </a>
                         <span class="text-secondary mb-0">Create table</span>
                     </div>
@@ -95,8 +95,7 @@
                         <asp:DropDownList runat="server" ID="drpColEditSwt" CssClass="px-2 py-2 black_4 text-light fw-light border-0" AutoPostBack="true" OnSelectedIndexChanged="drpColEditSwt_SelectedIndexChanged">
                             <asp:ListItem Selected="True" Text="Add column" Value="0"></asp:ListItem>
                             <asp:ListItem Text="Del column" Value="1"></asp:ListItem>
-                            <asp:ListItem Text="Add constrain" Value="2"></asp:ListItem>
-                            <asp:ListItem Text="Del constrain" Value="3"></asp:ListItem>
+                            <asp:ListItem Text="Modify column" Value="2"></asp:ListItem>
                         </asp:DropDownList>
                     </div>
                 </div>
@@ -154,39 +153,18 @@
                         </div>
                     </asp:View>
 
-
-                    <%-- Add Constrain --%>
-                    <asp:View runat="server" ID="viewAddConstrain">
-                        <div class="row black_3 pb-2 pt-0">
-                            <div class="col-12">
-                                <h5 class="white d-none">Add constrain
-                                </h5>
-                            </div>
-                            <div class="col-md-3 mt-2 col-sm-4 col-6  d-flex">
-                            </div>
-                            <div class="col-md-3 mt-2 col-sm-4 col-6  d-flex">
-                            </div>
-                            <div class="col-md-3 mt-2 col-sm-4 col-6 d-flex">
-                            </div>
-                            <div class="col-md-3 mt-2 col-sm-4 col-6  d-flex">
-                                <asp:Button runat="server" ID="Button2" CssClass="btn btn-primary" Text="Add" OnClick="Button2_Click" />
-                            </div>
-                        </div>
-                    </asp:View>
-
-
-                    <%-- Delete Constrain --%>
+                    <%-- Modify Column --%>
                     <asp:View runat="server" ID="viewDelConstrain">
                         <div class="row black_3 pb-2 pt-0">
                             <div class="col-12">
-                                <h5 class="white d-none">Delete constrain
+                                <h5 class="white d-none">Modify column
                                 </h5>
                             </div>
                             <div class="col-md-3 mt-2 col-sm-4 col-6  d-flex">
-                                <asp:TextBox ID="txtDelConstrain" runat="server" placeholder="Column name *" CssClass="w-100 px-2 py-2 black_4 text-light fw-light border-0"></asp:TextBox>
+                                <asp:TextBox ID="txtModifyCol" runat="server" placeholder="Column name *" CssClass="w-100 px-2 py-2 black_4 text-light fw-light border-0"></asp:TextBox>
                             </div>
                             <div class="col-md-3 mt-2 col-sm-4 col-6  d-flex">
-                                <asp:Button runat="server" ID="Button1" CssClass="btn btn-primary" Text="Delete" />
+                                <asp:Button runat="server" ID="Button1" CssClass="btn btn-primary" Text="Modify" />
                             </div>
                         </div>
                     </asp:View>

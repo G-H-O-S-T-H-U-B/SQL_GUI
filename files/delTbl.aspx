@@ -15,7 +15,7 @@
 
                 <!-- Back Link Start -->
                 <div class="row">
-                    <div class="col-12 pb-3 px-0">
+                    <div class="col-12 pb-3 px-1">
                         <a  class="text-secondary text-decoration-none" runat="server" href="~/files/default.aspx">Home / </a>
                         <span class="text-secondary mb-0" >Delete table</span>
                     </div>
@@ -26,11 +26,11 @@
                 <%-- Create / Select Table Multiview --%>
                 <div class="row">
                     <div class="col-12 px-0">
-                        <%--<asp:DropDownList runat="server" ID="drpCreateSelectSwt" CssClass="px-2 py-2 black_4 text-light fw-light border-0 w-100" AutoPostBack="true" OnSelectedIndexChanged="drpCreateSelectSwt_SelectedIndexChanged">
+                        <asp:DropDownList runat="server" ID="drpCreateSelectSwt" CssClass="d-none px-2 py-2 black_4 text-light fw-light border-0 w-100" AutoPostBack="true" OnSelectedIndexChanged="drpCreateSelectSwt_SelectedIndexChanged">
                             <asp:ListItem Selected="True" Text="Create table" Value="0"></asp:ListItem>
                             <asp:ListItem Text="Select table" Value="1"></asp:ListItem>
                             <asp:ListItem Text="Delete table" Value="2"></asp:ListItem>
-                        </asp:DropDownList>--%>
+                        </asp:DropDownList>
                     </div>
                 </div>
                 <asp:MultiView runat="server" ID="mltCreate_Select_Tbl" ActiveViewIndex="2">

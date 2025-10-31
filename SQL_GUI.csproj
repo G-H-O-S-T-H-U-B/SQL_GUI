@@ -121,6 +121,7 @@
     <Content Include="files\createTbl.aspx" />
     <Content Include="files\default.aspx" />
     <Content Include="files\delTbl.aspx" />
+    <Content Include="files\help.aspx" />
     <Content Include="files\login.aspx" />
     <Content Include="files\selectTbl.aspx" />
     <Content Include="Global.asax" />
@@ -206,6 +207,13 @@
     </Compile>
     <Compile Include="files\delTbl.aspx.designer.cs">
       <DependentUpon>delTbl.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="files\help.aspx.cs">
+      <DependentUpon>help.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="files\help.aspx.designer.cs">
+      <DependentUpon>help.aspx</DependentUpon>
     </Compile>
     <Compile Include="files\login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>

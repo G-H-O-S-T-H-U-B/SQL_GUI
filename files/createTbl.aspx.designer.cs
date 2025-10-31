@@ -222,24 +222,6 @@ namespace SQL_GUI.files
         protected global::System.Web.UI.WebControls.Button btnDelCol;
 
         /// <summary>
-        /// viewAddConstrain control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.View viewAddConstrain;
-
-        /// <summary>
-        /// Button2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
-
-        /// <summary>
         /// viewDelConstrain control.
         /// </summary>
         /// <remarks>
@@ -249,13 +231,13 @@ namespace SQL_GUI.files
         protected global::System.Web.UI.WebControls.View viewDelConstrain;
 
         /// <summary>
-        /// txtDelConstrain control.
+        /// txtModifyCol control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDelConstrain;
+        protected global::System.Web.UI.WebControls.TextBox txtModifyCol;
 
         /// <summary>
         /// Button1 control.

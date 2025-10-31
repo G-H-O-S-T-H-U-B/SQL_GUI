@@ -66,32 +66,25 @@ namespace SQL_GUI.files
         {
             int item = Convert.ToInt32(drpColEditSwt.SelectedValue);
             mltColEdit.ActiveViewIndex = item;
-            if (item == 0) 
+            if (item == 0)
             {
                 txtDelCol.Text = ""; // 2
-                
-                txtDelConstrain.Text = ""; // 4
+
+                txtModifyCol.Text = ""; // 3
             }
             else if (item == 1)
             {
                 txtColName.Text = ""; // 1
                 drpColDatatype.SelectedIndex = 0; // 1
-               
-                txtDelConstrain.Text = ""; // 4
+
+                txtModifyCol.Text = ""; // 3
             }
             else if (item == 2)
             {
                 txtColName.Text = ""; // 1
                 drpColDatatype.SelectedIndex = 0; // 1
                 txtDelCol.Text = ""; // 2
-                txtDelConstrain.Text = ""; // 4
-            }
-            else if(item == 3)
-            {
-                txtColName.Text = ""; // 1
-                drpColDatatype.SelectedIndex = 0; // 1
-                txtDelCol.Text = ""; // 2
-                
+                txtModifyCol.Text = ""; // 3
             }
             else
             {
@@ -173,7 +166,7 @@ namespace SQL_GUI.files
         // Add Constrain btn
         protected void Button2_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         // SQL Cammond run btn 
@@ -197,7 +190,7 @@ namespace SQL_GUI.files
             {
                 tblName = drpSelectTbl.SelectedItem.Text.Trim();
             }
-            else if(drpCreateSelectSwt.SelectedIndex == 2)
+            else if (drpCreateSelectSwt.SelectedIndex == 2)
             {
                 tblName = drpDelTbl.SelectedItem.Text.Trim();
             }
@@ -273,13 +266,30 @@ namespace SQL_GUI.files
         // Add Column
         protected void addCol(string tblName, string colName, string dataType, string constraint)
         {
-            if (!string.IsNullOrEmpty(colName) && !string.IsNullOrEmpty(dataType))
+            if (!string.IsNullOrEmpty(colName) && !string.IsNullOrEmpty(dataType) && !string.IsNullOrEmpty(tblName))
             {
+                string query = "";
+
+                if (drpColConstraint.SelectedValue == "null" && drpColDatatype.SelectedValue == "nvarchar(MAX)")
+                {
+                    query = $"ALTER TABLE [{tblName}] ADD [{colName}] {dataType} {constraint} DEFAULT '' ";
+                }
+                else if (drpColConstraint.SelectedValue == "null" && drpColDatatype.SelectedValue == "bigint")
+                {
+                    query = $"ALTER TABLE [{tblName}] ADD [{colName}] {dataType} {constraint} DEFAULT 0 ";
+                }
+                else if (drpColConstraint.SelectedValue == "null" && drpColDatatype.SelectedValue == "primary key")
+                {
+                    query = $"ALTER TABLE [{tblName}] ADD CONSTRAINT PK_{tblName}_{colName} PRIMARY KEY ([{colName}])";
+                }
+                else
+                {
+                    query = $"ALTER TABLE [{tblName}] ADD [{colName}] {dataType} {constraint} ";
+                }
                 try
                 {
                     using (SqlConnection con = new SqlConnection(conString))
                     {
-                        string query = $"ALTER TABLE [{tblName}] ADD [{colName}] {dataType} {constraint}";
                         con.Open();
                         SqlCommand cmd = new SqlCommand(query, con);
                         cmd.ExecuteNonQuery();
@@ -287,9 +297,9 @@ namespace SQL_GUI.files
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "success", "alert('Column Added Successfully');", true);
                     }
                 }
-                catch (Exception ex)
+                catch (SqlException ex)
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "error", $"alert('{ex.Message}');", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "error", $"alert('{ex.Message.Replace("'", "\\'")}');", true);
                 }
             }
             else
@@ -334,8 +344,8 @@ namespace SQL_GUI.files
         {
             try
             {
-                if (!string.IsNullOrEmpty(query)) 
-                { 
+                if (!string.IsNullOrEmpty(query))
+                {
                     using (SqlConnection con = new SqlConnection(conString))
                     {
                         con.Open();
@@ -354,9 +364,9 @@ namespace SQL_GUI.files
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "message", $"alert('First write command :)');", true);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "error", $"alert('{ex.Message}');", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "error", $"alert('{ex.Message.Replace("'", "\\'")}');", true);
             }
         }
 
@@ -461,6 +471,6 @@ namespace SQL_GUI.files
             tblSchema.DataBind();
         }
 
-    
+
     }
 }
