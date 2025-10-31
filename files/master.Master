@@ -15,7 +15,12 @@
 
         body {
             background-color: var(--black_1);
+            /*height: 100vh;*/
         }
+
+        /*body::-webkit-scrollbar{
+            width: 0px;
+        }*/
 
         :root {
             --orange: orange;
@@ -67,9 +72,9 @@
             background-color: white;
         }
 
-        .side_nav::-webkit-scrollbar {
-            width: 0px;
-        }
+            .side_nav::-webkit-scrollbar {
+                width: 0px;
+            }
 
         .side_nav_toggle {
             width: 280px;
@@ -77,13 +82,16 @@
 
         #menu_icon {
             cursor: pointer;
-            padding: 10px 5px;
+            /*padding: 10px 5px;
             top: 80px;
             right: -31px;
-            z-index: 100;
-            border-radius: 0%;
             writing-mode: vertical-lr;
-            transform: rotate(0deg);
+            z-index: 100;*/
+            font-weight: 900;
+            margin: 0px;
+            padding: 0px 30px;
+            border-radius: 0%;
+            transform: rotate(90deg);
         }
 
         .custom-position-responsive {
@@ -92,9 +100,35 @@
 
         @media (min-width: 992px) {
             .custom-position-responsive {
-            position: relative;
+                position: relative;
+            }
+
+            .side_nav {
+                width: 280px;
+            }
+
+            .side_nav_toggle {
+                width: 0px;
             }
         }
+
+        link_hover {
+            transition: all 0.5s ease;
+        }
+
+        .link_hover:focus {
+            font-weight: 900;
+            letter-spacing: 2px;
+            background-color: white !important;
+        }
+
+        .link_hover:hover {
+            font-weight: 900;
+            letter-spacing: 2px;
+            background-color: white !important;
+        }
+
+
 
         /* NAVIGATION END */
     </style>
@@ -105,15 +139,21 @@
             <%-- HEADER START --%>
 
             <div id="header" class="container-fluid border shadow-sm position-fixed top-0 bg-white">
-                <div class="container py-2">
-                    <div class="row">
-                        <div class="col-12">
-                            <a href="#" class="d-block py-2">
-                                <h2 class="m-0 fw-bold">SQL UI</h2>
+                <!-- <div class="container py-2"> -->
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-start">
+                        <a href="#" class="d-block py-2 text-decoration-none">
+                            <h2 class="m-0 fw-bold">SQL UI</h2>
+                        </a>
+                        <!-- MENU BTN ICON START -->
+                        <div id="menu_icon" class="small mb-0 border-0 border-primary positionfv-absolute d-flex align-items-center" onclick="side_bar_toggle()">
+                            <a href="#">|||
                             </a>
                         </div>
+                        <!-- MENU BTN ICON END -->
                     </div>
                 </div>
+                <!-- </div> -->
             </div>
 
             <%-- HEADER END --%>
@@ -122,96 +162,82 @@
                 <%-- NAVIGATION BAR START --%>
 
                 <div class="bg-white custom-position-responsive" style="height: 100vh;">
-                    <!-- MENU BTN ICON START -->
-                    <div id="menu_icon" class="small mb-0 text-white bg-danger position-absolute d-flex align-items-center" onclick="side_bar_toggle()">
-                        MENU
-                    </div>
-                    <!-- MENU BTN ICON END -->
+
                     <!-- LINKS ARE HERE  -->
 
                     <ul class="side_nav list-unstyled mb-0 text-nowrap">
-                       <%-- <li>
+                        <%-- <li>
                             <h3 class="mb-0 px-3 py-2">Menu
                             </h3>
                         </li>--%>
+                        <!-- TABLES LINK -->
+                        <li class="nav-item">
+                            <a class="nav-link px-3 py-2" href="#" data-bs-toggle="collapse" data-bs-target="#tblSubMenu" aria-expand="false" aria-controls="tblSubMenu">My Tables</a>
+                            <ul id="tblSubMenu" class="collapse list-unstyled mb-0">
+                                <asp:Repeater runat="server" ID="tblRpt">
+                                    <ItemTemplate>
+                                        <li class="nav-item bg-light link_hover">
+                                            <a runat="server" href="#" class="nav-link px-4 py-2"><%# Eval("Table Name") %></a>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </ul>
+                        </li>
                         <!-- CREATE TABLE LINK -->
                         <li class="nav-item">
-                            <a class="nav-link px-3 py-2" href="#" data-bs-toggle="collapse" data-bs-target="#createTblSubMenu" aria-expand="false" aria-controls="createTblSubMenu">Tables</a>
-                            <ul id="createTblSubMenu" class="collapse list-unstyled mb-0">
-                                <li class="nav-item">
-                                    <a runat="server" href="~/files/createTbl.aspx" class="nav-link px-4 py-2" >Create Table</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a runat="server" href="#" class="nav-link px-4 py-2">Add Value</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a runat="server" href="~/files/selectTbl.aspx" class="nav-link px-4 py-2">Select Table</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a runat="server" href="~/files/default.aspx" class="nav-link px-4 py-2">Modify Table</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a runat="server" href="~/files/delTbl.aspx" class="nav-link px-4 py-2">Delete Table</a>
-                                </li>
-                            </ul>
+                            <a runat="server" href="~/files/createTbl.aspx" class="nav-link px-3 py-2">Create Table</a>
                         </li>
                         <!-- SELECT TABLE LINK -->
                         <li class="nav-item">
-                            <a class="nav-link px-3 py-2" href="#" data-bs-toggle="collapse" data-bs-target="#selectTblSubMenu" aria-expand="false" aria-controls="selectTblSubMenus">Button 2</a>
-                            <ul id="selectTblSubMenu" class="collapse list-unstyled mb-0">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link px-4 py-2" >Link 1</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link px-4 py-2">Link 2</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link px-4 py-2">Link 3</a>
-                                </li>
-                            </ul>
+                            <a runat="server" href="~/files/selectTbl.aspx" class="nav-link px-3 py-2">Select Table</a>
                         </li>
                         <!-- DELETE TABLE LINK -->
                         <li class="nav-item">
-                            <a class="nav-link px-3 py-2" href="#" data-bs-toggle="collapse" data-bs-target="#delTblSubMenu" aria-expand="false" aria-controls="delTblSubMenus">Button 3</a>
-                            <ul id="delTblSubMenu" class="collapse list-unstyled mb-0">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link px-4 py-2" >Link 1</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link px-4 py-2">Link 2</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link px-4 py-2">Link 3</a>
-                                </li>
-                            </ul>
+                            <a runat="server" href="~/files/delTbl.aspx" class="nav-link px-3 py-2">Delete Table</a>
+                        </li>
+                        <!-- HELP BTN -->
+                        <li class="nav-item">
+                            <a runat="server" href="#" class="nav-link px-3 py-2">Help</a>
                         </li>
                         <!-- LOGOUT BTN -->
                         <li class="nav-item">
-                            <a class="nav-link px-3 py-2" href="#" data-bs-toggle="collapse" data-bs-target="#logoutSubMenu" aria-expand="false" aria-controls="logoutSubMenu">Logout</a>
-                            <ul id="logoutSubMenu" class="collapse list-unstyled mb-0">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link px-4 py-2" >Link 1</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link px-4 py-2">Link 2</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link px-4 py-2">Link 3</a>
-                                </li>
-                            </ul>
+                            <asp:Button runat="server" ID="btnLogout" class="nav-link px-3 py-2 w-100 bg-transparent border-0 text-start" Text="Logout" OnClick="btnLogout_Click" />
+                        </li>
+                        <!-- MODEL TESTING LINK -->
+                        <li class="nav-item">
+                            <a runat="server" href="#" data-bs-toggle="modal" data-bs-target="#infoModal" class="nav-link px-3 py-2">Model Testing</a>
                         </li>
                     </ul>
                     <!-- LINKS ARE ABOVE -->
                 </div>
 
+                <!-- Model Testing -->
+
+                <div class="modal fade " id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+                    <div class="modal-dialog border float-left">
+                        <div class="bg-danger" >
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="infoModalLabel">More Options</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Select an action:</p>
+                                <a href="#" class="btn btn-success">Go to Next Page</a>
+                                <asp:Button ID="btnDoAction" runat="server" CssClass="btn btn-warning" Text="Run Server Action" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <%-- NAVIGATION BAR END --%>
                 <%-- MAIN CONTENT START --%>
-                <div class="w-100" style="height: 100vh;overflow-y: scroll;">
+
+                <div class="w-100" id="pages_content_holder" style="height: 100vh; overflow-y: scroll;">
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
 
-                <%-- MAIN CONTENT START --%>
+                <%-- MAIN CONTENT END --%>
             </div>
 
 

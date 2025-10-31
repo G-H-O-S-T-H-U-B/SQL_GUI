@@ -99,6 +99,14 @@ namespace SQL_GUI.files
             }
         }
 
+        // Multiview Select Table Preview Or Details
+
+        protected void drpTblShow_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mltTbl.ActiveViewIndex = Convert.ToInt32(drpTblShow.SelectedValue);
+        }
+
+
         // Create Table btn
         protected void btnCreateTbl_Click(object sender, EventArgs e)
         {
@@ -168,8 +176,14 @@ namespace SQL_GUI.files
             
         }
 
+        // SQL Cammond run btn 
+        protected void sqlCommandRunBtn_Click(object sender, EventArgs e)
+        {
+            string query = sqlTxt.Text.Trim();
+            runSqlCommand(query);
+        }
 
-        // =====================  User Define Functions
+        // =====================  User Define Functions =======================================
 
         // Get Table Name
         protected string getTblName()
@@ -313,7 +327,39 @@ namespace SQL_GUI.files
         }
 
         // Add Constrain
-      
+
+        // Run SQL Command 
+
+        protected void runSqlCommand(string query)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(query)) 
+                { 
+                    using (SqlConnection con = new SqlConnection(conString))
+                    {
+                        con.Open();
+                        SqlDataAdapter da = new SqlDataAdapter(query, con);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        tblPreview.DataSource = dt;
+                        tblPreview.DataBind();
+
+
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "message", $"alert('Code run successfully');", true);
+                    }
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "message", $"alert('First write command :)');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "error", $"alert('{ex.Message}');", true);
+            }
+        }
+
 
 
         // Fill Dropdowns
@@ -323,7 +369,7 @@ namespace SQL_GUI.files
             {
                 using (SqlConnection con = new SqlConnection(conString))
                 {
-                    string query = "SELECT TABLE_NAME\r\nFROM INFORMATION_SCHEMA.TABLES\r\nWHERE TABLE_TYPE = 'BASE TABLE';";
+                    string query = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE';";
                     con.Open();
                     SqlCommand cmd = new SqlCommand(query, con);
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -415,6 +461,6 @@ namespace SQL_GUI.files
             tblSchema.DataBind();
         }
 
-
+    
     }
 }

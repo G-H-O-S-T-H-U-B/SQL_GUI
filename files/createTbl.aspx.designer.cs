@@ -267,6 +267,42 @@ namespace SQL_GUI.files
         protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
+        /// sqlTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox sqlTxt;
+
+        /// <summary>
+        /// sqlCommandRunBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button sqlCommandRunBtn;
+
+        /// <summary>
+        /// drpTblShow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpTblShow;
+
+        /// <summary>
+        /// mltTbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.MultiView mltTbl;
+
+        /// <summary>
         /// panel control.
         /// </summary>
         /// <remarks>

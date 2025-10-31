@@ -33,15 +33,6 @@ namespace SQL_GUI.files
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// drpCreateSelectSwt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpCreateSelectSwt;
-
-        /// <summary>
         /// mltCreate_Select_Tbl control.
         /// </summary>
         /// <remarks>
